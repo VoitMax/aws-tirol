@@ -71,7 +71,7 @@ async function loadData(url) {
             `;
             return L.marker(latlng, {
                 icon: L.icon({
-                    iconUrl: `/Wien/icons/wifi.png`,
+                    iconUrl: `/icons/wifi.png`,
                     iconAnchor: [16, 37],
                     popupAnchor: [0, -37]
                 })
