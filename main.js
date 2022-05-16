@@ -63,3 +63,21 @@ async function loadData(url) {
     // Wetterstationen mit Icons und Popups implementieren
 }
 loadData("https://static.avalanche.report/weather_stations/stations.geojson");
+
+L.geoJson(geojson, {
+    pointToLayer: function(geoJsonPoint, latlng) {
+        // L.marker(latlng).addTo(map)
+        // console.log(geoJsonPoint.geometry.coordinates[2]);
+        let popup = `
+            <strong>${geoJsonPoint.properties.name}</strong><br>
+            (${geoJsonPoint.geometry.coordinates[2]} m ü.d.M.)
+        `;
+        return L.marker(latlng, {
+            icon: L.icon({
+                iconUrl: `icons/wifi.png`,
+                iconAnchor: [16, 37],
+                popupAnchor: [0, -37]
+            })
+        }).bindPopup(popup);
+    }
+}).addTo(overlays.stations);
