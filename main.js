@@ -66,7 +66,7 @@ let getColor = function(value,ramp) {
 };
 
 // Wetterstationslayer beim Laden anzeigen
-overlays.stations.addTo(map);
+overlays.temperature.addTo(map);
 
 
 // Station
@@ -113,6 +113,7 @@ let drawTemperature = function(geojson) {
                 geoJsonPoint.properties.LT,
                 COLORS.temperature
             );
+        
 
             return L.marker(latlng, {
                 icon: L.divIcon({
