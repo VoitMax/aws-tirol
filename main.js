@@ -85,6 +85,12 @@ let drawStation = function(geojson) {
 let drawTemperature = function(geojson) {
     // Wetterstationen mit Icons und Popups implementieren
     L.geoJson(geojson, {
+        filter: function(geoJsonPoint){
+            if (geoJsonPoint.properties.LT > -50 && geoJsonPoint.properties.LT < 50){
+                return true;
+            }
+
+        },
         pointToLayer: function(geoJsonPoint, latlng) {
             // L.marker(latlng).addTo(map)
             // console.log(geoJsonPoint.geometry.coordinates[2]);
@@ -94,8 +100,8 @@ let drawTemperature = function(geojson) {
             `;
             return L.marker(latlng, {
                 icon: L.divIcon({
-                    className: "aws.-div-icon",
-                    html:`<span>${geoJsonPoint.properties.LT}</span>`
+                    className: "aws-div-icon",
+                    html:`<span>${geoJsonPoint.properties.LT.toFixed(1)}</span>`
                 })
             }).bindPopup(popup);
         }
