@@ -55,9 +55,20 @@ L.control.fullscreen().addTo(map);
 // Diese Layer beim Laden anzeigen 
 overlays.temperature.addTo(map);
 
+// Farben nach Wert und Sc hwellen ermitteln
+let getColor = function(value,ramp) {
+    console.log(value,ramp);
+    for (let rule of ramp) {
+        console.log(rule)
+        if (value >= rule.min && value < rule.max)
+        return rule.color; 
+    }
+};
 
 // Wetterstationslayer beim Laden anzeigen
 overlays.stations.addTo(map);
+
+
 // Station
 let drawStation = function(geojson) {
     // Wetterstationen mit Icons und Popups implementieren
@@ -98,10 +109,15 @@ let drawTemperature = function(geojson) {
                 <strong>${geoJsonPoint.properties.name}</strong><br>
                 (${geoJsonPoint.geometry.coordinates[2]} m ü.d.M.)
             `;
+            let color = getColor(
+                geoJsonPoint.properties.LT,
+                COLORS.temperature
+            );
+
             return L.marker(latlng, {
                 icon: L.divIcon({
                     className: "aws-div-icon",
-                    html:`<span>${geoJsonPoint.properties.LT.toFixed(1)}</span>`
+                    html:`<span style="background-color:${color}">${geoJsonPoint.properties.LT.toFixed(1)}</span>`
                 })
             }).bindPopup(popup);
         }
