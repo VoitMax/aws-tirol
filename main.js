@@ -83,7 +83,8 @@ let drawStation = function(geojson) {
                 Windrichtung (°): ${geoJsonPoint.properties.WR}<br>
                 Schneehöhe (cm): ${geoJsonPoint.properties.HS}<br>
                 Relative Luftfeuchtigkeit (%): ${geoJsonPoint.properties.RH}<br>
-                (${geoJsonPoint.geometry.coordinates[2]} m ü.d.M.)
+                (${geoJsonPoint.geometry.coordinates[2]} m ü.d.M.)Wetterverlaufsgrafik
+                <a href="https://wiski.tirol.gv.at/lawine/grafiken/1100/standard/dreitage/${geoJsonPoint.properties.plot}.png">Wetterverlaufsgrafik</a>
             `;
             return L.marker(latlng, {
                 icon: L.icon({
